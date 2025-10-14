@@ -1,35 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
+
+enum Strength {
+  WEAK = "WEAK",
+  MEDIUM = "MEDIUM",
+  STRONG = "STRONG",
+}
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [password, setPassword] = useState("PTx1f5DaFX");
+  const [strength, setStrength] = useState(Strength.WEAK);
 
   return (
     <>
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+        <h3>Password Generator</h3>
+        <button>
+          {password} <p>COPIED</p>
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <div>
+        <label>Character Length</label>
+        <p>Include Uppercase Letters</p>
+        <p>Include Lowercase Letters</p>
+        <p>Include Numbers</p>
+        <p>Include Symbols</p>
+
+        <div>
+          <p>STRENGTH</p>
+          <p>{strength}</p>
+        </div>
+
+        <button>GENERATE</button>
+      </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
