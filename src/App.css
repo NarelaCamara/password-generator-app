@@ -1,4 +1,6 @@
 @import "tailwindcss";
 
 #root {
+  font-family: "JetBrains Mono", monospace;
+  color: #e6e5ea;
 }
