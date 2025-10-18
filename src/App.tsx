@@ -31,6 +31,7 @@ function App() {
   const [strength, setStrength] = useState<Strength>(Strength.WEAK);
   const [characterLength, setCharacterLength] = useState<number>(0);
   const [inputChecks, setInputChecks] = useState(0);
+  const [copied, setCopied] = useState(false);
 
   const handleClickCheck = () => {
     setInputChecks((prev) => prev + 1);
@@ -40,6 +41,21 @@ function App() {
     setCharacterLength(Number(event.target.value));
   };
 
+  const handleCopy = async () => {
+    try {
+      // Usamos la API de Clipboard moderna
+      await navigator.clipboard.writeText(password);
+      // Actualizamos el estado para mostrar el mensaje de éxito
+      setCopied(true);
+      // Opcional: Ocultar el mensaje de éxito después de 2 segundos,
+      // como un efecto de magia que desaparece.
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      // Si hay un error (por ejemplo, el navegador no soporta la API)
+      console.error("¡Fallo al copiar el texto!", err);
+    }
+  };
+
   return (
     <div className="bg-[#08070B] flex flex-col items-center justify-center min-h-screen ">
       <h3 className="text-[24px] text-[#817D92]">Password Generator</h3>
@@ -47,10 +63,13 @@ function App() {
         <div className="bg-[#24232C] p-4 my-4">
           <button className="flex flex-row items-center justify-between w-full">
             <h5 className="text-2xl"> {password}</h5>
-            <div className="flex flex-row items-center gap-2 mt-2">
+            <button
+              onClick={handleCopy}
+              className="flex flex-row items-center gap-2 mt-2"
+            >
               <p className="text-[18px] text-[#A4FFAF]">COPIED</p>
               <img src={iconCopy} alt="" />
-            </div>
+            </button>
           </button>
         </div>
 
