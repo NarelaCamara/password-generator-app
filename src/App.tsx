@@ -30,6 +30,11 @@ function App() {
   const [password, setPassword] = useState<string>("PTx1f5DaFX");
   const [strength, setStrength] = useState<Strength>(Strength.WEAK);
   const [characterLength, setCharacterLength] = useState<number>(0);
+  const [inputChecks, setInputChecks] = useState(0);
+
+  const handleClickCheck = () => {
+    setInputChecks((prev) => prev + 1);
+  };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setCharacterLength(Number(event.target.value));
@@ -79,10 +84,16 @@ function App() {
           </div>
 
           <div className="my-8">
-            <InputCheck text="Include Uppercase Letters" />
-            <InputCheck text="Include Lowercase Letters" />
-            <InputCheck text="Include Numbers" />
-            <InputCheck text="Include Symbols" />
+            <InputCheck
+              onClick={handleClickCheck}
+              text="Include Uppercase Letters"
+            />
+            <InputCheck
+              onClick={handleClickCheck}
+              text="Include Lowercase Letters"
+            />
+            <InputCheck onClick={handleClickCheck} text="Include Numbers" />
+            <InputCheck onClick={handleClickCheck} text="Include Symbols" />
           </div>
 
           <div className="bg-[#18171F] py-4 px-8 my-8 flex flex-row items-center justify-between w-full">
