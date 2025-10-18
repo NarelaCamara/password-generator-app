@@ -6,8 +6,23 @@ import { InputCheck } from "./components/inputCheck";
 
 const Strength = {
   WEAK: "WEAK",
+  /** Criterio,Descripción
+   * Longitud,≤7 caracteres.
+   * Checkpoints,≤2 checkpoints activados.
+   * Ejemplo,"mypass (6 caracteres, solo minúsculas, 1 checkpoint)." */
   MEDIUM: "MEDIUM",
+  /**Criterio,Descripción
+   * Longitud,≥8 Y ≤11 caracteres.
+   * Checkpoints,≥3 checkpoints activados O ≥12 caracteres con ≤2 checkpoints activados.
+   * Ejemplo 1,"M1pass_ (8 caracteres, 4 checkpoints: Mayús, Minús, Núm, Símbolo)."
+   * Ejemplo 2,"passwordlong (12 caracteres, 2 checkpoints: Minús, Mayús -
+  asumiendo que l es minúscula y L mayúscula en otro caso, pero si es solo minúsculas y números: pass12345678, 12 caracteres, 2 checkpoints)." */
   STRONG: "STRONG",
+  /**Criterio,Descripción
+   * Longitud,≥12 caracteres.
+   * Checkpoints,≥3 checkpoints activados.
+   * Criterio Óptimo,≥14 caracteres Y los 4 checkpoints activados.
+   * Ejemplo,"P@sswOrd12345! (14 caracteres, 4 checkpoints: Mayús, Minús, Núm, Símbolo)." */
 } as const;
 type Strength = (typeof Strength)[keyof typeof Strength];
 
