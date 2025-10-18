@@ -1,8 +1,8 @@
-import { useState, type ChangeEvent } from "react";
-import iconArrowRight from "./assets/icon-arrow-right.svg";
-import iconCheck from "./assets/icon-check.svg";
-import iconCopy from "./assets/icon-copy.svg";
 import "./App.css";
+import { useState, type ChangeEvent } from "react";
+import iconCopy from "./assets/icon-copy.svg";
+import iconArrowRight from "./assets/icon-arrow-right.svg";
+import { InputCheck } from "./components/inputCheck";
 
 const Strength = {
   WEAK: "WEAK",
@@ -58,13 +58,10 @@ function App() {
           </div>
 
           <div className="my-8">
-            <div className="w-[20px] h-[20px] bg-[#A4FFAF] flex flex-row items-center justify-center mb-4">
-              <img src={iconCheck} alt="" />
-            </div>
-            <p className="text-[16px] py-2">Include Uppercase Letters</p>
-            <p className="text-[16px] py-2">Include Lowercase Letters</p>
-            <p className="text-[16px] py-2">Include Numbers</p>
-            <p className="text-[16px] py-2">Include Symbols</p>
+            <InputCheck text="Include Uppercase Letters" />
+            <InputCheck text="Include Lowercase Letters" />
+            <InputCheck text="Include Numbers" />
+            <InputCheck text="Include Symbols" />
           </div>
 
           <div className="bg-[#18171F] p-4 my-8 flex flex-row items-center justify-between w-full">
