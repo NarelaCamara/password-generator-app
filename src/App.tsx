@@ -22,8 +22,8 @@ function App() {
 
   return (
     <div className="bg-[#08070B] flex flex-col items-center justify-center min-h-screen ">
+      <h3 className="text-[24px] text-[#817D92]">Password Generator</h3>
       <div className="max-w-[540px] w-full">
-        <h3 className="text-[16px]">Password Generator</h3>
         <div className="bg-[#24232C] p-4 my-4">
           <button className="flex flex-row items-center justify-between w-full">
             <h5 className="text-2xl"> {password}</h5>
@@ -64,8 +64,8 @@ function App() {
             <InputCheck text="Include Symbols" />
           </div>
 
-          <div className="bg-[#18171F] p-4 my-8 flex flex-row items-center justify-between w-full">
-            <p className="text-[16px]">STRENGTH</p>
+          <div className="bg-[#18171F] py-4 px-8 my-8 flex flex-row items-center justify-between w-full">
+            <p className="text-[18px] text-[#817D92]">STRENGTH</p>
             <div className="flex flex-row items-center gap-2">
               <p className="text-[24px]">{strength}</p>
               <div className="flex flex-row items-center gap-2">
