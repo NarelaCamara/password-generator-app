@@ -78,7 +78,7 @@ function App() {
                 <div className="w-[10px] h-[28px] bg-[#F8CD65]"></div>
                 <div className="w-[10px] h-[28px] bg-[#F8CD65]"></div>
                 <div className="w-[10px] h-[28px] bg-[#F8CD65]"></div>
-                <div className="w-[10px] h-[28px] bg-[#F8CD65]"></div>
+                <div className="w-[10px] h-[28px] border-2 border-amber-50  "></div>
               </div>
             </div>
           </div>
