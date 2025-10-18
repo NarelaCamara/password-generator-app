@@ -57,10 +57,15 @@ function App() {
             />
           </div>
 
-          <p className="text-[16px] py-2">Include Uppercase Letters</p>
-          <p className="text-[16px] py-2">Include Lowercase Letters</p>
-          <p className="text-[16px] py-2">Include Numbers</p>
-          <p className="text-[16px] py-2">Include Symbols</p>
+          <div className="my-8">
+            <div className="w-[20px] h-[20px] bg-[#A4FFAF] flex flex-row items-center justify-center mb-4">
+              <img src={iconCheck} alt="" />
+            </div>
+            <p className="text-[16px] py-2">Include Uppercase Letters</p>
+            <p className="text-[16px] py-2">Include Lowercase Letters</p>
+            <p className="text-[16px] py-2">Include Numbers</p>
+            <p className="text-[16px] py-2">Include Symbols</p>
+          </div>
 
           <div className="bg-[#18171F] p-4 my-8 flex flex-row items-center justify-between w-full">
             <p className="text-[16px]">STRENGTH</p>
