@@ -4,3 +4,105 @@
   font-family: "JetBrains Mono", monospace;
   color: #e6e5ea;
 }
+
+.range-green-tailwind::-webkit-slider-runnable-track {
+  /* ... (degradado del track, sin cambios) ... */
+  background: linear-gradient(
+    to right,
+    #a4ffaf 0%,
+    #a4ffaf calc(var(--val) / var(--max) * 100%),
+    #e5e7eb calc(var(--val) / var(--max) * 100%),
+    #e5e7eb 100%
+  );
+  /* 📏 Altura del Track: 8px */
+  height: 8px; /* ¡Aseguramos la altura de 8px! */
+  border-radius: 4px;
+}
+
+.range-green-tailwind::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  /* 📏 Altura y Anchura del Thumb: 28px */
+  height: 28px;
+  width: 28px;
+  border-radius: 50%;
+  background: #e6e5ea; /* Color del thumb */
+  cursor: pointer;
+  /* 📐 Margen ajustado para centrar (Thumb 28px vs Track 8px) */
+  margin-top: -10px; /* (28/2) - (8/2) = 14 - 4 = 10 */
+  border: none;
+  box-shadow: 0 0 0 1px #e6e5ea;
+}
+
+/* =================================
+   ESTILOS BASE PARA WEBKIT Y MOZILLA
+   ================================= */
+
+/* Ajusta la altura del track base, aunque la apariencia final se define en los pseudoelementos */
+.range-green-tailwind {
+  /* Establece la variable para el relleno (viene del JSX: style={{'--val': characterLength, '--max': 20}}) */
+  background: none; 
+}
+
+
+/* =================================
+   WEBKIT (Chrome, Safari, Edge)
+   ================================= */
+
+.range-green-tailwind::-webkit-slider-runnable-track {
+  /* Pista (Track) - Relleno Verde */
+  background: linear-gradient(
+    to right,
+    #a4ffaf 0%,
+    #a4ffaf calc(var(--val) / var(--max) * 100%),
+    #e5e7eb calc(var(--val) / var(--max) * 100%),
+    #e5e7eb 100%
+  );
+  /* 📏 Altura del Track: 8px */
+  height: 8px; 
+  border-radius: 4px;
+}
+
+.range-green-tailwind::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  /* 📏 Altura y Anchura del Thumb: 28px */
+  height: 28px; 
+  width: 28px;
+  border-radius: 50%;
+  background: #e6e5ea; /* Gris claro (thumb) */
+  cursor: pointer;
+  /* 📐 Margen ajustado para centrar (Thumb 28px vs Track 8px) */
+  margin-top: -10px; /* (28/2) - (8/2) = 10 */
+  border: none;
+  box-shadow: 0 0 0 1px #e6e5ea;
+}
+
+
+/* =================================
+   MOZILLA (Firefox)
+   ================================= */
+
+.range-green-tailwind::-moz-range-track {
+  /* Pista (Track) - Relleno Verde */
+  background: linear-gradient(
+    to right,
+    #a4ffaf 0%,
+    #a4ffaf calc(var(--val) / var(--max) * 100%),
+    #e5e7eb calc(var(--val) / var(--max) * 100%),
+    #e5e7eb 100%
+  );
+  /* 📏 Altura del Track: 8px */
+  height: 8px; /* ¡Igual que Webkit! */
+  border-radius: 4px;
+}
+
+.range-green-tailwind::-moz-range-thumb {
+  /* 📏 Altura y Anchura del Thumb: 28px */
+  height: 28px; 
+  width: 28px;
+  border-radius: 50%;
+  background: #e6e5ea; /* Gris claro (thumb) */
+  cursor: pointer;
+  /* El margen en Firefox no suele ser necesario o se maneja de forma diferente,
+     pero la altura del thumb de 28px ya está definida aquí. */
+  border: none;
+}

@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState, type ChangeEvent } from "react";
+import { useState, type ChangeEvent, type CSSProperties } from "react";
 import iconCopy from "./assets/icon-copy.svg";
 import iconArrowRight from "./assets/icon-arrow-right.svg";
 import { InputCheck } from "./components/inputCheck";
@@ -52,8 +52,14 @@ function App() {
               type="range"
               min="0"
               max="20"
+              style={
+                {
+                  ["--val"]: `${characterLength}`,
+                  ["--max"]: "20",
+                } as CSSProperties
+              }
               value={characterLength}
-              className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+              className="w-full h-2 bg-[#18171F] rounded-lg appearance-none cursor-pointer  range-green-tailwind"
             />
           </div>
 
