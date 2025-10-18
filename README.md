@@ -1,73 +1,67 @@
-# React + TypeScript + Vite
+¡Absolutamente\! Es una excelente manera de visualizar la fortaleza de la contraseña. Podemos adaptar el criterio anterior de WEAK, MEDIUM y STRONG a un sistema de **4 barras (o niveles de progreso)** que se "pintan" (llenan) a medida que se cumplen más requisitos.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+El principio sigue siendo la **Entropía**, determinada por la **Longitud** y la **Diversidad de Caracteres** (los $4$ *checkpoints*).
 
-Currently, two official plugins are available:
+Aquí está el criterio para llenar las 4 barras:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+-----
 
-## React Compiler
+## Criterio de 4 Barras de Fortaleza
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Las barras se llenan progresivamente desde 1 (muy débil) hasta 4 (fuerte) según la combinación de la cantidad de *checkpoints* activados ($P$) y la longitud de la contraseña ($L$).
 
-## Expanding the ESLint configuration
+### Cálculo Base
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1.  **Longitud ($L$):** El largo de la contraseña (hasta 20 caracteres).
+2.  **Puntuación de Checkpoints ($P$):** Número de tipos de caracteres incluidos (Mayúsculas, Minúsculas, Números, Símbolos). $P$ va de 1 a 4.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+| Barras Pintadas | Nivel de Fortaleza | Criterios para Llenar la Barra |
+| :--- | :--- | :--- |
+| **1 de 4** 🟥 | **Muy Débil** | $L \le 7$ **O** $P = 1$ |
+| **2 de 4** 🟨 | **Débil a Media** | $L \ge 8$ **Y** $P \ge 2$ **O** $L \ge 10$ **Y** $P = 1$ |
+| **3 de 4** 🟩 | **Media a Fuerte** | $L \ge 12$ **Y** $P \ge 3$ **O** $L \ge 15$ **Y** $P = 2$ |
+| **4 de 4** 🟦 | **Muy Fuerte** | $L \ge 14$ **Y** $P = 4$ **O** $L = 20$ **Y** $P \ge 3$ |
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+\<hr\>
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Guía de Implementación Detallada (Lógica de Cascada)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Para tu código, te sugiero evaluar desde el nivel más alto (4 barras) hacia abajo, o usar una función de puntuación que acumule puntos y mapee el resultado a las 4 barras.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+#### Lógica Basada en Puntuación Acumulativa
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Puedes asignar "puntos" por cada criterio cumplido y luego mapear la puntuación total a las 4 barras.
+
+| Criterio Cumplido | Puntos Otorgados |
+| :--- | :--- |
+| **Checkpoints:** Cada tipo de carácter incluido ($P$) | **+1 Punto** por cada uno (Máx. 4) |
+| **Longitud:** $L \ge 8$ | **+1 Punto** |
+| **Longitud:** $L \ge 12$ | **+1 Punto** |
+| **Longitud:** $L \ge 16$ | **+1 Punto** |
+| **Puntuación Máxima Total** | **8 Puntos** |
+
+#### Mapeo de Puntuación a Barras
+
+| Puntuación Acumulativa | Barras Pintadas |
+| :--- | :--- |
+| $\le 3$ Puntos | **1 de 4** 🟥 |
+| $4$ o $5$ Puntos | **2 de 4** 🟨 |
+| $6$ o $7$ Puntos | **3 de 4** 🟩 |
+| $8$ Puntos | **4 de 4** 🟦 |
+
+**Ejemplo Rápido:**
+
+1.  **Contraseña:** `pAss123` ($L=7$).
+
+      * $P=3$ (Mayús, Minús, Núm) $\rightarrow 3$ Puntos.
+      * $L < 8$ (No suma puntos de longitud).
+      * **Total:** 3 Puntos $\rightarrow$ **1 de 4 Barras** (Muy Débil).
+
+2.  **Contraseña:** `SecurePwd123!` ($L=13$).
+
+      * $P=4$ (Mayús, Minús, Núm, Símbolos) $\rightarrow 4$ Puntos.
+      * $L \ge 8$ $\rightarrow +1$ Punto.
+      * $L \ge 12$ $\rightarrow +1$ Punto.
+      * $L < 16$ (No suma el último punto de longitud).
+      * **Total:** $4 + 1 + 1 = 6$ Puntos $\rightarrow$ **3 de 4 Barras** (Fuerte).
+
