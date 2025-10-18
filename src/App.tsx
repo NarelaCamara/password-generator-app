@@ -1,4 +1,7 @@
 import { useState, type ChangeEvent } from "react";
+import iconArrowRight from "./assets/icon-arrow-right.svg";
+import iconCheck from "./assets/icon-check.svg";
+import iconCopy from "./assets/icon-copy.svg";
 import "./App.css";
 
 const Strength = {
@@ -22,9 +25,12 @@ function App() {
       <div className="max-w-[540px] w-full">
         <h3 className="text-[16px]">Password Generator</h3>
         <div className="bg-[#24232C] p-4 my-4">
-          <button>
-            <h5 className="text-2xl"> {password}</h5>{" "}
-            <p className="text-[16px]">COPIED</p>
+          <button className="flex flex-row items-center justify-between w-full">
+            <h5 className="text-2xl"> {password}</h5>
+            <div className="flex flex-row items-center gap-2 mt-2">
+              <p className="text-[18px] text-[#A4FFAF]">COPIED</p>
+              <img src={iconCopy} alt="" />
+            </div>
           </button>
         </div>
 
@@ -38,7 +44,7 @@ function App() {
                 Character Length
               </label>
 
-              <p>{characterLength}</p>
+              <p className="text-[32px] text-[#A4FFAF]">{characterLength}</p>
             </div>
             <input
               id="minmax-range"
@@ -50,18 +56,28 @@ function App() {
               className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
             />
           </div>
+
           <p className="text-[16px] py-2">Include Uppercase Letters</p>
           <p className="text-[16px] py-2">Include Lowercase Letters</p>
           <p className="text-[16px] py-2">Include Numbers</p>
           <p className="text-[16px] py-2">Include Symbols</p>
 
-          <div className="bg-[#18171F] p-4 my-8">
+          <div className="bg-[#18171F] p-4 my-8 flex flex-row items-center justify-between w-full">
             <p className="text-[16px]">STRENGTH</p>
-            <p className="text-[18px]">{strength}</p>
+            <div className="flex flex-row items-center gap-2">
+              <p className="text-[24px]">{strength}</p>
+              <div className="flex flex-row items-center gap-2">
+                <div className="w-[10px] h-[28px] bg-[#F8CD65]"></div>
+                <div className="w-[10px] h-[28px] bg-[#F8CD65]"></div>
+                <div className="w-[10px] h-[28px] bg-[#F8CD65]"></div>
+                <div className="w-[10px] h-[28px] bg-[#F8CD65]"></div>
+              </div>
+            </div>
           </div>
 
-          <button className="bg-[#A4FFAF] py-4 w-full ">
+          <button className="bg-[#A4FFAF] py-4 w-full flex flex-row items-center justify-center gap-4">
             <p className="text-[16px] text-[#24232C]">GENERATE</p>
+            <img src={iconArrowRight} alt="" />
           </button>
         </div>
       </div>
