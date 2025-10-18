@@ -61,16 +61,31 @@ function App() {
       <h3 className="text-[24px] text-[#817D92]">Password Generator</h3>
       <div className="max-w-[540px] w-full">
         <div className="bg-[#24232C] p-4 my-4">
-          <button className="flex flex-row items-center justify-between w-full">
+          <div className="flex flex-row items-center justify-between w-full">
             <h5 className="text-2xl"> {password}</h5>
             <button
+              data-tooltip-target="tooltip-click"
+              data-tooltip-trigger="click"
               onClick={handleCopy}
               className="flex flex-row items-center gap-2 mt-2"
             >
               <p className="text-[18px] text-[#A4FFAF]">COPIED</p>
               <img src={iconCopy} alt="" />
             </button>
-          </button>
+            {/* *** EL TOOLTIP CON CLASES DE TAILWIND ***
+          Solo se renderiza si 'copiado' es true.
+        */}
+            {copied && (
+              <div
+                className="absolute -top-10 left-1/2 transform -translate-x-1/2 
+                          bg-green-500 text-white text-sm 
+                          py-1 px-3 rounded shadow-lg whitespace-nowrap 
+                          animate-fadeInDown"
+              >
+                ¡Copiado Correctamente! ✨
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="bg-[#24232C] p-4">
