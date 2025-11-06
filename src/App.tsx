@@ -3,8 +3,9 @@ import { useState, type ChangeEvent, type CSSProperties } from "react";
 import iconCopy from "./assets/icon-copy.svg";
 import iconArrowRight from "./assets/icon-arrow-right.svg";
 import { InputCheck } from "./components/inputCheck";
+import { Boxes } from "./components/boxes";
 
-const Strength = {
+export const Strength = {
   WEAK: "WEAK",
   /** Criterio,Descripción
    * Longitud,≤7 caracteres.
@@ -24,17 +25,32 @@ const Strength = {
    * Criterio Óptimo,≥14 caracteres Y los 4 checkpoints activados.
    * Ejemplo,"P@sswOrd12345! (14 caracteres, 4 checkpoints: Mayús, Minús, Núm, Símbolo)." */
 } as const;
-type Strength = (typeof Strength)[keyof typeof Strength];
+export type Strength = (typeof Strength)[keyof typeof Strength];
 
 function App() {
   const [password, setPassword] = useState<string>("PTx1f5DaFX");
   const [strength, setStrength] = useState<Strength>(Strength.WEAK);
   const [characterLength, setCharacterLength] = useState<number>(0);
-  const [inputChecks, setInputChecks] = useState(0);
+  const [inputchecks, setInputChecks] = useState(0);
   const [copied, setCopied] = useState(false);
 
-  const handleClickCheck = () => {
-    setInputChecks((prev) => prev + 1);
+  console.log("nare", inputchecks, characterLength, strength, password);
+
+  const handleGeneratePassword = () => {
+    // Lógica para generar la contraseña basada en characterLength e inputchecks
+    if (characterLength >= 12 && inputchecks >= 3) {
+      setStrength(Strength.STRONG);
+    } else if (characterLength >= 8 && inputchecks >= 3) {
+      setStrength(Strength.MEDIUM);
+    } else {
+      setStrength(Strength.WEAK);
+    }
+    // Aquí deberías implementar la lógica real de generación de contraseñas
+    setPassword("NuevaContraseña123!");
+  };
+
+  const handleClickCheck = (num: number) => {
+    setInputChecks((prev) => prev + num);
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -134,16 +150,14 @@ function App() {
             <p className="text-[18px] text-[#817D92]">STRENGTH</p>
             <div className="flex flex-row items-center gap-2">
               <p className="text-[24px]">{strength}</p>
-              <div className="flex flex-row items-center gap-2">
-                <div className="w-[10px] h-[28px] bg-[#F8CD65]"></div>
-                <div className="w-[10px] h-[28px] bg-[#F8CD65]"></div>
-                <div className="w-[10px] h-[28px] bg-[#F8CD65]"></div>
-                <div className="w-[10px] h-[28px] border-2 border-amber-50  "></div>
-              </div>
+              <Boxes strength={strength} />
             </div>
           </div>
 
-          <button className="bg-[#A4FFAF] py-4 w-full flex flex-row items-center justify-center gap-4">
+          <button
+            onClick={handleGeneratePassword}
+            className="bg-[#A4FFAF] py-4 w-full flex flex-row items-center justify-center gap-4"
+          >
             <p className="text-[16px] text-[#24232C]">GENERATE</p>
             <img src={iconArrowRight} alt="" />
           </button>
