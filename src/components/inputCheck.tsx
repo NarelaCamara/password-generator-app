@@ -6,7 +6,7 @@ export const InputCheck = ({
   onClick,
 }: {
   text: string;
-  onClick: (delta: number) => void;
+  onClick: (delta: number, text: string) => void;
 }) => {
   const [checked, setChecked] = useState(false);
 
@@ -15,7 +15,7 @@ export const InputCheck = ({
       <button
         onClick={() => {
           setChecked(!checked);
-          onClick(checked ? -1 : 1);
+          onClick(checked ? -1 : 1, text);
         }}
         className={`w-[20px] h-[20px]  flex flex-row items-center justify-center ${
           checked ? "bg-[#A4FFAF]" : "border-2 border-amber-50"

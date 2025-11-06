@@ -4,6 +4,15 @@ import iconCopy from "./assets/icon-copy.svg";
 import iconArrowRight from "./assets/icon-arrow-right.svg";
 import { InputCheck } from "./components/inputCheck";
 import { Boxes } from "./components/boxes";
+import { useGenerate } from "./hook/generate_pass";
+
+// eslint-disable-next-line react-refresh/only-export-components
+export enum ChecksTexts {
+  INCLUDE_UPPERCASE = "Include Uppercase Letters",
+  INCLUDE_LOWERCASE = "Include Lowercase Letters",
+  INCLUDE_NUMBERS = "Include Numbers",
+  INCLUDE_SYMBOLS = "Include Symbols",
+}
 
 export const Strength = {
   WEAK: "WEAK",
@@ -33,11 +42,11 @@ function App() {
   const [characterLength, setCharacterLength] = useState<number>(0);
   const [inputchecks, setInputChecks] = useState(0);
   const [copied, setCopied] = useState(false);
-
-  console.log("nare", inputchecks, characterLength, strength, password);
+  const { generatePassword, handleValidation } = useGenerate();
 
   const handleGeneratePassword = () => {
-    // Lógica para generar la contraseña basada en characterLength e inputchecks
+    // Lógica para generar la contraseña basada en charact
+    // erLength e inputchecks
     if (characterLength >= 12 && inputchecks >= 3) {
       setStrength(Strength.STRONG);
     } else if (characterLength >= 8 && inputchecks >= 3) {
@@ -46,11 +55,12 @@ function App() {
       setStrength(Strength.WEAK);
     }
     // Aquí deberías implementar la lógica real de generación de contraseñas
-    setPassword("NuevaContraseña123!");
+    setPassword(generatePassword());
   };
 
-  const handleClickCheck = (num: number) => {
+  const handleClickCheck = (num: number, text: string) => {
     setInputChecks((prev) => prev + num);
+    handleValidation(text);
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -136,14 +146,20 @@ function App() {
           <div className="my-8">
             <InputCheck
               onClick={handleClickCheck}
-              text="Include Uppercase Letters"
+              text={ChecksTexts.INCLUDE_UPPERCASE}
             />
             <InputCheck
               onClick={handleClickCheck}
-              text="Include Lowercase Letters"
+              text={ChecksTexts.INCLUDE_LOWERCASE}
             />
-            <InputCheck onClick={handleClickCheck} text="Include Numbers" />
-            <InputCheck onClick={handleClickCheck} text="Include Symbols" />
+            <InputCheck
+              onClick={handleClickCheck}
+              text={ChecksTexts.INCLUDE_NUMBERS}
+            />
+            <InputCheck
+              onClick={handleClickCheck}
+              text={ChecksTexts.INCLUDE_SYMBOLS}
+            />
           </div>
 
           <div className="bg-[#18171F] py-4 px-8 my-8 flex flex-row items-center justify-between w-full">
