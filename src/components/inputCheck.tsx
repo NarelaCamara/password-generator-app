@@ -18,10 +18,10 @@ export const InputCheck = ({
           onClick(checked ? -1 : 1);
         }}
         className={`w-[20px] h-[20px]  flex flex-row items-center justify-center ${
-          checked ? "border-2 border-amber-50" : "bg-[#A4FFAF]"
+          checked ? "bg-[#A4FFAF]" : "border-2 border-amber-50"
         } `}
       >
-        <img src={iconCheck} alt="" className={checked ? "hidden" : "show"} />
+        <img src={iconCheck} alt="" className={checked ? "show" : "hidden"} />
       </button>
       <p className="text-[16px]">{text}</p>
     </div>
