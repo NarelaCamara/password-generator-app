@@ -5,14 +5,7 @@ import iconArrowRight from "./assets/icon-arrow-right.svg";
 import { InputCheck } from "./components/inputCheck";
 import { Boxes } from "./components/boxes";
 import { useGenerate } from "./hook/generate_pass";
-
-// eslint-disable-next-line react-refresh/only-export-components
-export enum ChecksTexts {
-  INCLUDE_UPPERCASE = "Include Uppercase Letters",
-  INCLUDE_LOWERCASE = "Include Lowercase Letters",
-  INCLUDE_NUMBERS = "Include Numbers",
-  INCLUDE_SYMBOLS = "Include Symbols",
-}
+import { ChecksTexts } from "./utils/utils";
 
 export const Strength = {
   WEAK: "WEAK",

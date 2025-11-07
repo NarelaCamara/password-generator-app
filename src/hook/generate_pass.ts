@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChecksTexts } from "../App";
+import { ChecksTexts } from "../utils/utils";
 
 export const useGenerate = () => {
   const [validation, setValidation] = useState({
