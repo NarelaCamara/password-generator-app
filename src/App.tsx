@@ -37,7 +37,7 @@ export const Strength = {
 export type Strength = (typeof Strength)[keyof typeof Strength];
 
 function App() {
-  const [password, setPassword] = useState<string>("PTx1f5DaFX");
+  const [password, setPassword] = useState<string>("");
   const [strength, setStrength] = useState<Strength>(Strength.WEAK);
   const [characterLength, setCharacterLength] = useState<number>(0);
   const [inputchecks, setInputChecks] = useState(0);
@@ -55,12 +55,12 @@ function App() {
       setStrength(Strength.WEAK);
     }
     // Aquí deberías implementar la lógica real de generación de contraseñas
-    setPassword(generatePassword());
+    setPassword(generatePassword(characterLength));
   };
 
   const handleClickCheck = (num: number, text: string) => {
     setInputChecks((prev) => prev + num);
-    handleValidation(text);
+    handleValidation(text, num === 1);
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {

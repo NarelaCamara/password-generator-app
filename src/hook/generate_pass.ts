@@ -2,26 +2,27 @@ import { useState } from "react";
 import { ChecksTexts } from "../App";
 
 export const useGenerate = () => {
-  const [validation, setValidation] = useState([]);
+  const [validation, setValidation] = useState({
+    uppercase: true,
+    lowercase: true,
+    simbols: false,
+    numbers: false,
+  });
 
-  const handleValidation = (newValidation: string) => {
+  const handleValidation = (newValidation: string, bool: boolean) => {
     if (ChecksTexts.INCLUDE_UPPERCASE === newValidation) {
-      return "";
+      setValidation({ ...validation, uppercase: bool });
     } else if (ChecksTexts.INCLUDE_LOWERCASE === newValidation) {
-      return "";
+      setValidation({ ...validation, lowercase: bool });
     } else if (ChecksTexts.INCLUDE_SYMBOLS === newValidation) {
-      return "";
+      setValidation({ ...validation, simbols: bool });
     } else if (ChecksTexts.INCLUDE_NUMBERS === newValidation) {
-      return "";
+      setValidation({ ...validation, numbers: bool });
     }
   };
 
-  const getRandomInt = (min: number, max: number) => {
-    // Math.ceil() asegura que el límite inferior (min) sea inclusivo
-    min = Math.ceil(min);
-    // Math.floor() asegura que el límite superior (max) sea inclusivo
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+  const getRandomInt = () => {
+    return Math.floor(Math.random() * (9 - 0 + 1)) + 0;
   };
 
   const generateRandomUppercaseLetter = () => {
@@ -53,8 +54,45 @@ export const useGenerate = () => {
     return simboloResultante;
   };
 
-  const generatePassword = () => {
-    return "";
+  const generateValidations = () => {
+    const validationsArray: string[] = Object.keys(validation).filter(
+      (key) => validation[key as keyof typeof validation] === true
+    );
+    console.log("validationsArray:", validationsArray);
+    const numRandom = Math.floor(Math.random() * validationsArray.length);
+    console.log("numRandom:", numRandom);
+    const validationSelect = validationsArray[numRandom];
+    console.log("validationSelect:", validationSelect);
+    return handleValidationSelect(validationSelect);
+  };
+
+  const handleValidationSelect = (validationSelect: string) => {
+    switch (validationSelect) {
+      case "uppercase":
+        return generateRandomUppercaseLetter();
+      case "lowercase":
+        return generateRandomUppercaseLetter().toLocaleLowerCase();
+      case "simbols":
+        return generarSimboloAleatorio();
+      case "numbers":
+        return getRandomInt().toString();
+    }
+  };
+
+  const generatePassword = (characterLength: number) => {
+    if (characterLength <= 0) {
+      console.error(
+        "El valor de characterLength debe ser mayor a cero:",
+        characterLength
+      );
+      return "";
+    }
+    let randomChoice: string = "";
+    for (let i = 0; i < characterLength; i++) {
+      console.log("randomChoice before:", generateValidations());
+      randomChoice = `${randomChoice}${generateValidations()}`;
+    }
+    return randomChoice;
   };
 
   return { generatePassword, handleValidation };
