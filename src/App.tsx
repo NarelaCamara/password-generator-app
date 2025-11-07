@@ -35,6 +35,7 @@ function App() {
   const [characterLength, setCharacterLength] = useState<number>(0);
   const [inputchecks, setInputChecks] = useState(0);
   const [copied, setCopied] = useState(false);
+  const [error, setError] = useState(false);
   const { generatePassword, handleValidation } = useGenerate();
 
   const handleGeneratePassword = () => {
@@ -48,6 +49,7 @@ function App() {
       setStrength(Strength.WEAK);
     }
     // Aquí deberías implementar la lógica real de generación de contraseñas
+    setError(characterLength === 0);
     setPassword(generatePassword(characterLength));
   };
 
@@ -86,7 +88,7 @@ function App() {
               data-tooltip-target="tooltip-click"
               data-tooltip-trigger="click"
               onClick={handleCopy}
-              className="flex flex-row items-center gap-2 mt-2"
+              className="flex flex-row items-center gap-2 mt-2 cursor-pointer"
             >
               <p className="text-[18px] text-[#A4FFAF]">COPIED</p>
               <img src={iconCopy} alt="" />
@@ -154,7 +156,11 @@ function App() {
               text={ChecksTexts.INCLUDE_SYMBOLS}
             />
           </div>
-
+          {error && (
+            <p className="text-[16px] text-red-500 text-end">
+              Min. one character
+            </p>
+          )}
           <div className="bg-[#18171F] py-4 px-8 my-8 flex flex-row items-center justify-between w-full">
             <p className="text-[18px] text-[#817D92]">STRENGTH</p>
             <div className="flex flex-row items-center gap-2">
@@ -165,7 +171,7 @@ function App() {
 
           <button
             onClick={handleGeneratePassword}
-            className="bg-[#A4FFAF] py-4 w-full flex flex-row items-center justify-center gap-4"
+            className="bg-[#A4FFAF] py-4 w-full flex flex-row items-center justify-center gap-4 cursor-pointer"
           >
             <p className="text-[16px] text-[#24232C]">GENERATE</p>
             <img src={iconArrowRight} alt="" />
